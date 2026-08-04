@@ -1,14 +1,14 @@
 {
   "type": "micro",
   "wake_word": "hey baardee",
-  "author": "...",
-  "website": "...",
+  "author": "bash-net",
+  "website": "https://github.com",
   "model": "hey_baardee.tflite",
-  "model_url": "https://github.com",
+  "model_url": "https://githubusercontent.com",
   "trained_languages": ["en"],
   "version": 2,
   "micro": {
-    "probability_cutoff": 0.97,
+    "probability_cutoff": 0.85,
     "sliding_window_size": 5,
     "feature_step_size": 10,
     "tensor_arena_size": 30000,

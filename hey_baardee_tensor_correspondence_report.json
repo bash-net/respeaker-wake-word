@@ -1,0 +1,644 @@
+{
+  "schema_version": 1,
+  "summary": {
+    "total_onnx_node_outputs": 25,
+    "direct_count": 23,
+    "rewritten_count": 2,
+    "inferred_count": 0,
+    "missing_count": 0,
+    "rewritten_but_missing_count": 0,
+    "lineage_event_count": 14
+  },
+  "lineage_events": [
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "layer1.weight",
+        "layer1.bias",
+        "blocks.0.fcn_layer.weight",
+        "blocks.0.fcn_layer.bias",
+        "last_layer.weight",
+        "last_layer.bias",
+        "wa/layernorm1/ReduceMean_axes",
+        "wa/layernorm1/ReduceMean_1_axes",
+        "wa/blocks.0/layer_norm/ReduceMean_axes",
+        "wa/blocks.0/layer_norm/ReduceMean_1_axes"
+      ],
+      "event_index": 0
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 1
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 2
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 3
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 4
+    },
+    {
+      "kind": "rename_tensor",
+      "old_name": "wa/layernorm1/Add_1_output_0",
+      "new_name": "wa/relu1/Relu_output_0",
+      "source": "set_operator_outputs",
+      "event_index": 5
+    },
+    {
+      "kind": "fuse_add_activation",
+      "add_op_type": "ADD",
+      "activation_op_type": "RELU",
+      "fused_activation": "RELU",
+      "add_output": "wa/layernorm1/Add_1_output_0",
+      "fused_output": "wa/relu1/Relu_output_0",
+      "event_index": 6
+    },
+    {
+      "kind": "rename_tensor",
+      "old_name": "wa/blocks.0/layer_norm/Add_1_output_0",
+      "new_name": "wa/blocks.0/relu/Relu_output_0",
+      "source": "set_operator_outputs",
+      "event_index": 7
+    },
+    {
+      "kind": "fuse_add_activation",
+      "add_op_type": "ADD",
+      "activation_op_type": "RELU",
+      "fused_activation": "RELU",
+      "add_output": "wa/blocks.0/layer_norm/Add_1_output_0",
+      "fused_output": "wa/blocks.0/relu/Relu_output_0",
+      "event_index": 8
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "wa/layernorm1/Add_1_output_0",
+        "wa/blocks.0/layer_norm/Add_1_output_0"
+      ],
+      "event_index": 9
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 10
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 11
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 12
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 13
+    }
+  ],
+  "records": [
+    {
+      "identifier": 1,
+      "onnx_op_type": "Flatten",
+      "onnx_op_name": "wa/flatten/Flatten",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/flatten/Flatten_output_0",
+      "resolved_tflite_tensor_name": "wa/flatten/Flatten_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 0,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/flatten/Flatten_output_0"
+      ]
+    },
+    {
+      "identifier": 2,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "wa/layer1/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/layer1/Gemm_output_0",
+      "resolved_tflite_tensor_name": "wa/layer1/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 1,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/layer1/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 3,
+      "onnx_op_type": "ReduceMean",
+      "onnx_op_name": "wa/layernorm1/ReduceMean",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/layernorm1/ReduceMean_output_0",
+      "resolved_tflite_tensor_name": "wa/layernorm1/ReduceMean_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 2,
+      "producer_op_type": "MEAN",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/layernorm1/ReduceMean_output_0"
+      ]
+    },
+    {
+      "identifier": 4,
+      "onnx_op_type": "Sub",
+      "onnx_op_name": "wa/layernorm1/Sub",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/layernorm1/Sub_output_0",
+      "resolved_tflite_tensor_name": "wa/layernorm1/Sub_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 3,
+      "producer_operator_index": 3,
+      "producer_op_type": "SUB",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/layernorm1/Sub_output_0"
+      ]
+    },
+    {
+      "identifier": 5,
+      "onnx_op_type": "Mul",
+      "onnx_op_name": "wa/layernorm1/Pow_mul",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/layernorm1/Pow_output_0",
+      "resolved_tflite_tensor_name": "wa/layernorm1/Pow_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 4,
+      "producer_op_type": "MUL",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/layernorm1/Pow_output_0"
+      ]
+    },
+    {
+      "identifier": 6,
+      "onnx_op_type": "ReduceMean",
+      "onnx_op_name": "wa/layernorm1/ReduceMean_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/layernorm1/ReduceMean_1_output_0",
+      "resolved_tflite_tensor_name": "wa/layernorm1/ReduceMean_1_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 5,
+      "producer_op_type": "MEAN",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/layernorm1/ReduceMean_1_output_0"
+      ]
+    },
+    {
+      "identifier": 7,
+      "onnx_op_type": "Add",
+      "onnx_op_name": "wa/layernorm1/Add",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/layernorm1/Add_output_0",
+      "resolved_tflite_tensor_name": "wa/layernorm1/Add_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 6,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/layernorm1/Add_output_0"
+      ]
+    },
+    {
+      "identifier": 8,
+      "onnx_op_type": "Sqrt",
+      "onnx_op_name": "wa/layernorm1/Sqrt",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/layernorm1/Sqrt_output_0",
+      "resolved_tflite_tensor_name": "wa/layernorm1/Sqrt_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 7,
+      "producer_op_type": "SQRT",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/layernorm1/Sqrt_output_0"
+      ]
+    },
+    {
+      "identifier": 9,
+      "onnx_op_type": "Div",
+      "onnx_op_name": "wa/layernorm1/Div",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/layernorm1/Div_output_0",
+      "resolved_tflite_tensor_name": "wa/layernorm1/Div_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 8,
+      "producer_op_type": "DIV",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/layernorm1/Div_output_0"
+      ]
+    },
+    {
+      "identifier": 10,
+      "onnx_op_type": "Mul",
+      "onnx_op_name": "wa/layernorm1/Mul",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/layernorm1/Mul_output_0",
+      "resolved_tflite_tensor_name": "wa/layernorm1/Mul_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 9,
+      "producer_op_type": "MUL",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/layernorm1/Mul_output_0"
+      ]
+    },
+    {
+      "identifier": 11,
+      "onnx_op_type": "Add",
+      "onnx_op_name": "wa/layernorm1/Add_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/layernorm1/Add_1_output_0",
+      "resolved_tflite_tensor_name": "wa/relu1/Relu_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 10,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 5,
+          "kind": "rename_tensor",
+          "from": "wa/layernorm1/Add_1_output_0",
+          "to": "wa/relu1/Relu_output_0"
+        }
+      ],
+      "rewrite_name_chain": [
+        "wa/layernorm1/Add_1_output_0",
+        "wa/relu1/Relu_output_0"
+      ]
+    },
+    {
+      "identifier": 12,
+      "onnx_op_type": "Relu",
+      "onnx_op_name": "wa/relu1/Relu",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/relu1/Relu_output_0",
+      "resolved_tflite_tensor_name": "wa/relu1/Relu_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 10,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/relu1/Relu_output_0"
+      ]
+    },
+    {
+      "identifier": 13,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "wa/blocks.0/fcn_layer/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/blocks.0/fcn_layer/Gemm_output_0",
+      "resolved_tflite_tensor_name": "wa/blocks.0/fcn_layer/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 11,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/blocks.0/fcn_layer/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 14,
+      "onnx_op_type": "ReduceMean",
+      "onnx_op_name": "wa/blocks.0/layer_norm/ReduceMean",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/blocks.0/layer_norm/ReduceMean_output_0",
+      "resolved_tflite_tensor_name": "wa/blocks.0/layer_norm/ReduceMean_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 12,
+      "producer_op_type": "MEAN",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/blocks.0/layer_norm/ReduceMean_output_0"
+      ]
+    },
+    {
+      "identifier": 15,
+      "onnx_op_type": "Sub",
+      "onnx_op_name": "wa/blocks.0/layer_norm/Sub",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/blocks.0/layer_norm/Sub_output_0",
+      "resolved_tflite_tensor_name": "wa/blocks.0/layer_norm/Sub_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 3,
+      "producer_operator_index": 13,
+      "producer_op_type": "SUB",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/blocks.0/layer_norm/Sub_output_0"
+      ]
+    },
+    {
+      "identifier": 16,
+      "onnx_op_type": "Mul",
+      "onnx_op_name": "wa/blocks.0/layer_norm/Pow_mul",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/blocks.0/layer_norm/Pow_output_0",
+      "resolved_tflite_tensor_name": "wa/blocks.0/layer_norm/Pow_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 14,
+      "producer_op_type": "MUL",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/blocks.0/layer_norm/Pow_output_0"
+      ]
+    },
+    {
+      "identifier": 17,
+      "onnx_op_type": "ReduceMean",
+      "onnx_op_name": "wa/blocks.0/layer_norm/ReduceMean_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/blocks.0/layer_norm/ReduceMean_1_output_0",
+      "resolved_tflite_tensor_name": "wa/blocks.0/layer_norm/ReduceMean_1_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 15,
+      "producer_op_type": "MEAN",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/blocks.0/layer_norm/ReduceMean_1_output_0"
+      ]
+    },
+    {
+      "identifier": 18,
+      "onnx_op_type": "Add",
+      "onnx_op_name": "wa/blocks.0/layer_norm/Add",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/blocks.0/layer_norm/Add_output_0",
+      "resolved_tflite_tensor_name": "wa/blocks.0/layer_norm/Add_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 16,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/blocks.0/layer_norm/Add_output_0"
+      ]
+    },
+    {
+      "identifier": 19,
+      "onnx_op_type": "Sqrt",
+      "onnx_op_name": "wa/blocks.0/layer_norm/Sqrt",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/blocks.0/layer_norm/Sqrt_output_0",
+      "resolved_tflite_tensor_name": "wa/blocks.0/layer_norm/Sqrt_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 17,
+      "producer_op_type": "SQRT",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/blocks.0/layer_norm/Sqrt_output_0"
+      ]
+    },
+    {
+      "identifier": 20,
+      "onnx_op_type": "Div",
+      "onnx_op_name": "wa/blocks.0/layer_norm/Div",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/blocks.0/layer_norm/Div_output_0",
+      "resolved_tflite_tensor_name": "wa/blocks.0/layer_norm/Div_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 18,
+      "producer_op_type": "DIV",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/blocks.0/layer_norm/Div_output_0"
+      ]
+    },
+    {
+      "identifier": 21,
+      "onnx_op_type": "Mul",
+      "onnx_op_name": "wa/blocks.0/layer_norm/Mul",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/blocks.0/layer_norm/Mul_output_0",
+      "resolved_tflite_tensor_name": "wa/blocks.0/layer_norm/Mul_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 19,
+      "producer_op_type": "MUL",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/blocks.0/layer_norm/Mul_output_0"
+      ]
+    },
+    {
+      "identifier": 22,
+      "onnx_op_type": "Add",
+      "onnx_op_name": "wa/blocks.0/layer_norm/Add_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/blocks.0/layer_norm/Add_1_output_0",
+      "resolved_tflite_tensor_name": "wa/blocks.0/relu/Relu_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 20,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 7,
+          "kind": "rename_tensor",
+          "from": "wa/blocks.0/layer_norm/Add_1_output_0",
+          "to": "wa/blocks.0/relu/Relu_output_0"
+        }
+      ],
+      "rewrite_name_chain": [
+        "wa/blocks.0/layer_norm/Add_1_output_0",
+        "wa/blocks.0/relu/Relu_output_0"
+      ]
+    },
+    {
+      "identifier": 23,
+      "onnx_op_type": "Relu",
+      "onnx_op_name": "wa/blocks.0/relu/Relu",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/blocks.0/relu/Relu_output_0",
+      "resolved_tflite_tensor_name": "wa/blocks.0/relu/Relu_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 20,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/blocks.0/relu/Relu_output_0"
+      ]
+    },
+    {
+      "identifier": 24,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "wa/last_layer/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "wa/last_layer/Gemm_output_0",
+      "resolved_tflite_tensor_name": "wa/last_layer/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 21,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "wa/last_layer/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 25,
+      "onnx_op_type": "Sigmoid",
+      "onnx_op_name": "wa/last_act/Sigmoid",
+      "onnx_output_index": 0,
+      "onnx_output_name": "39",
+      "resolved_tflite_tensor_name": "39",
+      "exists_in_final_model": true,
+      "is_graph_output": true,
+      "consumer_count": 0,
+      "producer_operator_index": 22,
+      "producer_op_type": "LOGISTIC",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "39"
+      ]
+    }
+  ]
+}

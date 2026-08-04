@@ -4,6 +4,7 @@
   "author": "...",
   "website": "...",
   "model": "hey_baardee.tflite",
+  "model_url": "https://github.com",
   "trained_languages": ["en"],
   "version": 2,
   "micro": {
